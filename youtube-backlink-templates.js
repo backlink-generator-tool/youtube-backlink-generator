@@ -237,8 +237,8 @@ function archiveCurrentPageBackground(opts = {}) {
 function updateShareUrl(originalUrl) {
     //const encoded = encodeURIComponent(originalUrl);
     //const share = window.location.origin + window.location.pathname + "?" + encoded;
-    //const share = window.location.origin + window.location.pathname + "?" + originalUrl;
-   const share = window.location.origin + "?" + originalUrl;
+    const share = window.location.origin + window.location.pathname + "?" + originalUrl;
+    //const share = window.location.origin + "?" + originalUrl;
 
     document.getElementById("newUrl").value = share;
     //window.history.replaceState(null, "", "?" + encoded);
