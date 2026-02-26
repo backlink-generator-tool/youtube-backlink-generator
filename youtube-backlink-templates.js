@@ -70,11 +70,13 @@ function renderResults(urls) {
    SHAREABLE URL
 ================================= */
 function updateShareUrl(originalUrl) {
-    const encoded = encodeURIComponent(originalUrl);
-    const share = window.location.origin + window.location.pathname + "?" + encoded;
+    //const encoded = encodeURIComponent(originalUrl);
+    //const share = window.location.origin + window.location.pathname + "?" + encoded;
+   const share = window.location.origin + window.location.pathname + "?" + originalUrl;
 
     document.getElementById("newUrl").value = share;
-    window.history.replaceState(null, "", "?" + encoded);
+    //window.history.replaceState(null, "", "?" + encoded);
+    window.history.replaceState(null, "", "?" + originalUrl);
 }
 
 /* ===============================
@@ -206,7 +208,8 @@ function submitToArchiveST() {
    AUTO START
 ================================= */
 function autoStart() {
-    const param = decodeURIComponent(window.location.search.slice(1));
+    //const param = decodeURIComponent(window.location.search.slice(1));
+    const param = window.location.search.slice(1);
     if (!param) return;
 
     document.getElementById("urlInput").value = param;
