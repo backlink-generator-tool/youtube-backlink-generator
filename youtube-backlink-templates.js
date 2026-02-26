@@ -237,7 +237,8 @@ function archiveCurrentPageBackground(opts = {}) {
 function updateShareUrl(originalUrl) {
     //const encoded = encodeURIComponent(originalUrl);
     //const share = window.location.origin + window.location.pathname + "?" + encoded;
-   const share = window.location.origin + window.location.pathname + "?" + originalUrl;
+    //const share = window.location.origin + window.location.pathname + "?" + originalUrl;
+   const share = window.location.origin + "?" + originalUrl;
 
     document.getElementById("newUrl").value = share;
     //window.history.replaceState(null, "", "?" + encoded);
@@ -264,7 +265,7 @@ function startGenerator() {
 
     const backlinks = generateBacklinks(videoID);
     renderResults(backlinks);
-    updateShareUrl(input);
+    updateShareUrl(videoID);
 }
 
 /* ===============================
@@ -380,17 +381,45 @@ function submitToArchiveST() {
    AUTO START
 ================================= */
 function autoStart() {
-    //const param = decodeURIComponent(window.location.search.slice(1));
-    const param = window.location.search.slice(1);
-    if (!param) return;
+    if (!window.location.search) return;
 
-    document.getElementById("urlInput").value = param;
+    let query = window.location.search.substring(1);
+    query = decodeURIComponent(query).trim();
 
-    const videoID = extractYouTubeID(param);
+    if (!query) return;
+
+    let videoID = null;
+    let originalUrl = null;
+
+    // Case 1: Full YouTube URL
+    if (query.startsWith("http://") || query.startsWith("https://")) {
+        originalUrl = query;
+        videoID = extractYouTubeID(query);
+    }
+
+    // Case 2: Raw video ID (11 characters typical)
+    else if (/^[a-zA-Z0-9_-]{11}$/.test(query)) {
+        videoID = query;
+        originalUrl = "https://www.youtube.com/watch?v=" + videoID;
+    }
+
+    // Case 3 (optional): ?v=ID format
+    else if (query.startsWith("v=")) {
+        videoID = query.split("=")[1];
+        originalUrl = "https://www.youtube.com/watch?v=" + videoID;
+    }
+
     if (!videoID) return;
 
-    renderResults(generateBacklinks(videoID));
-    updateShareUrl(param);
+    // Set input field
+    document.getElementById("urlInput").value = originalUrl;
+
+    // Generate backlinks
+    const backlinks = generateBacklinks(videoID);
+    renderResults(backlinks);
+
+    // Update share URL
+    updateShareUrl(videoID);
 }
 
 /* ===============================
