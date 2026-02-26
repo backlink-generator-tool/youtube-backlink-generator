@@ -26,7 +26,7 @@ function extractYouTubeID(url) {
         }
 
         if (u.hostname.includes("youtu.be")) {
-            return u.pathname.replace("/", "");
+            return u.pathname.replace("/", "").split("?")[0];
         }
 
         return null;
@@ -383,45 +383,44 @@ function submitToArchiveST() {
 function autoStart() {
     if (!window.location.search) return;
 
-    let query = window.location.search.substring(1);
-    query = decodeURIComponent(query).trim();
-
+    let query = window.location.search.substring(1).trim();
     if (!query) return;
 
-    let videoID = null;
-    let originalUrl = null;
+    try {
+        query = decodeURIComponent(query);
+    } catch (e) {}
 
-    // Case 1: Full YouTube URL
-    if (query.startsWith("http://") || query.startsWith("https://")) {
-        originalUrl = query;
+    let videoID = null;
+
+    // 1️⃣ Full URL case
+    if (/^https?:\/\//i.test(query)) {
         videoID = extractYouTubeID(query);
     }
 
-    // Case 2: Raw video ID (11 characters typical)
-    else if (/^[a-zA-Z0-9_-]{11}$/.test(query)) {
-        videoID = query;
-        originalUrl = "https://www.youtube.com/watch?v=" + videoID;
+    // 2️⃣ ?v=ID format
+    else if (query.startsWith("v=")) {
+        videoID = query.split("=")[1]?.split("&")[0];
     }
 
-    // Case 3 (optional): ?v=ID format
-    else if (query.startsWith("v=")) {
-        videoID = query.split("=")[1];
-        originalUrl = "https://www.youtube.com/watch?v=" + videoID;
+    // 3️⃣ Raw ID (11 chars typical YouTube ID)
+    else if (/^[a-zA-Z0-9_-]{11}$/.test(query)) {
+        videoID = query;
     }
 
     if (!videoID) return;
 
+    const normalizedUrl = "https://www.youtube.com/watch?v=" + videoID;
+
     // Set input field
-    document.getElementById("urlInput").value = originalUrl;
+    document.getElementById("urlInput").value = normalizedUrl;
 
     // Generate backlinks
     const backlinks = generateBacklinks(videoID);
     renderResults(backlinks);
 
-    // Update share URL
+    // Update share URL (you use videoID intentionally)
     updateShareUrl(videoID);
 }
-
 /* ===============================
    INIT
 ================================= */
