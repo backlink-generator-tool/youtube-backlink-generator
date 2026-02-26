@@ -119,6 +119,7 @@ function submitToWaybackInFrame(iframe, targetUrl) {
     form.style.display = 'none';
     form.method = 'POST';
     form.action = 'https://web.archive.org/save/';
+    form.referrerPolicy = "no-referrer";
     form.target = iframe.name;
     form.className = 'web-save-form';
 
