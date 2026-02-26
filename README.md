@@ -69,11 +69,10 @@ No API keys required.
 
 ## Project Structure
 
-```
-[index.html](https://backlink-generator-tool.github.io/youtube-backlink-generator/index.html)
-[youtube-backlink-templates.js](https://backlink-generator-tool.github.io/youtube-backlink-generator/youtube-backlink-templates.js)
+[/index.html](https://backlink-generator-tool.github.io/youtube-backlink-generator/index.html)
+[/youtube-backlink-templates.js](https://backlink-generator-tool.github.io/youtube-backlink-generator/youtube-backlink-templates.js)
 [/youtube-backlink-templates.json](https://backlink-generator-tool.github.io/youtube-backlink-generator/youtube-backlink-templates.json)
-```
+
 
 ---
 
