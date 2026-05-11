@@ -165,5 +165,11 @@
     "https://yt.artemislena.eu/watch?v={{ID}}",
     "https://fooyoh.com/nowwatch/watch/{{ID}}",
     "https://trendtube.wdeco.jp/playlist/shadowbox/?{{ID}}",
-    "https://yewtu.be/watch?v={{ID}}"
+    "https://yewtu.be/watch?v={{ID}}",
+    "https://www.youtool.io/tools/video-analyzer/{{ID}}",
+    "https://aitubetool.com/tool/youtube-video-overview/?q=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D{{ID}}",
+    "https://views4you.com/tools/youtube-video-analytics/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D{{ID}}",
+    "https://ytlarge.com/monetization-checker/video/{{ID}}",
+    "https://youtubetoolkit.com/monetization-checker?url=https%253A%252F%252Fwww.youtube.com%252Fwatch%253Fv%253D{{ID}}",
+    "https://views4you.com/tools/youtube-money-calculator/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D{{ID}}"
 ]
