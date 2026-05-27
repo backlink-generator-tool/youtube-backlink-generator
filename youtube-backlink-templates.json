@@ -1,4 +1,5 @@
 [
+    "http://how-to-archive.github.io/youtube-video-backlink-tool/?{{ID}}",
     "http://2ch.io/www.youtube.com/watch?v={{ID}}",
     "http://32youtube.com/download.php?q={{ID}}",
     "http://abc.action.news/watch?v={{ID}}",
